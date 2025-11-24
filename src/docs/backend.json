@@ -1,0 +1,148 @@
+
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Represents a user's public profile information.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The user's unique ID from Firebase Auth." },
+        "name": { "type": "string", "description": "The user's full name." },
+        "email": { "type": "string", "format": "email", "description": "The user's email address." },
+        "pfp": { "type": "string", "format": "uri", "description": "URL to the user's profile picture." },
+        "username": { "type": "string" },
+        "displayName": { "type": "string" },
+        "ageGroup": {
+          "type": "string",
+          "enum": ["Under 18", "18+"]
+        },
+        "dateOfBirth": { "type": "string", "format": "date", "description": "The user's date of birth (YYYY-MM-DD)." },
+        "timezone": { "type": "string" },
+        "language": { "type": "string" },
+        "pronouns": { "type": "string" },
+        "bio": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "contactPreference": { "type": "string", "enum": ["Email", "Phone", "DM"] },
+        "publicContactEmail": { "type": "string", "format": "email" },
+        "personalWebsite": { "type": "string", "format": "uri" },
+        "socialContactLink": { "type": "string", "format": "uri" },
+        "githubProfile": { "type": "string", "format": "uri" },
+        "discordId": { "type": "string" },
+        "twitterHandle": { "type": "string" },
+        "instagramHandle": { "type": "string" },
+        "youTubeChannelUrl": { "type": "string", "format": "uri" },
+        "twitchUsername": { "type": "string" },
+        "redditUsername": { "type": "string" },
+        "jobTitle": { "type": "string" },
+        "company": { "type": "string" },
+        "yearsOfExperience": { "type": "number" },
+        "skills": { "type": "string" },
+        "portfolioUrl": { "type": "string", "format": "uri" },
+        "linkedinProfile": { "type": "string", "format": "uri" },
+        "professionalStatus": { "type": "string", "enum": ["Open to Work", "Not Looking", "Freelance/Contract"] },
+        "themePreference": { "type": "string", "enum": ["Light", "Dark", "System"] },
+        "notificationPreference": { "type": "string", "enum": ["Enabled", "Disabled"] },
+        "twoFactorPreference": { "type": "string", "enum": ["Email", "SMS", "None"] },
+        "preferredOs": { "type": "string", "enum": ["Windows", "macOS", "iOS", "Android", "Linux"] },
+        "preferredBrowser": { "type": "string" },
+        "gamerTag": { "type": "string" },
+        "favoriteGameGenre": { "type": "string" },
+        "steamProfile": { "type": "string", "format": "uri" },
+        "discordServerRole": { "type": "string" },
+        "accountVisibility": { "type": "string", "enum": ["Public", "Private"] },
+        "dataSharingConsent": { "type": "boolean" },
+        "marketingEmailsOptIn": { "type": "boolean" },
+        "backupEmail": { "type": "string", "format": "email" },
+        "sessionTimeout": { "type": "string", "enum": ["15 minutes", "30 minutes", "1 hour", "Never"] },
+        "preferredCurrency": { "type": "string" },
+        "shippingCountry": { "type": "string" },
+        "deliveryInstructions": { "type": "string" },
+        "preferredPaymentMethod": { "type": "string", "enum": ["Card", "PayPal", "Crypto", "None"] },
+        "wishlistCategory": { "type": "string" },
+        "interestTags": { "type": "string" },
+        "favoriteCategories": { "type": "string" },
+        "hideEmail": { "type": "boolean" },
+        "pin": { "type": "string", "description": "A 4-digit PIN for approvals." },
+        "pinSecurityLevel": { "type": "string", "enum": ["Off", "Low", "Medium", "High", "Full"], "description": "The security level for PIN protection." }
+      },
+      "required": ["uid", "name", "email", "ageGroup"]
+    },
+    "ClientApp": {
+      "title": "Client Application",
+      "description": "Represents a developer's application registered with FastPass.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique client ID for the application."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the application."
+        },
+        "redirectUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The callback URL for the application."
+        },
+        "logo": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the application's logo."
+        },
+        "ownerUid": {
+          "type": "string",
+          "description": "The UID of the user who owns this application."
+        },
+        "createdAt": {
+            "type": "number",
+            "description": "Timestamp of when the app was created."
+        },
+        "approvals": {
+            "type": "number",
+            "description": "Count of approvals for this app."
+        },
+        "requestedIntegrations": {
+          "type": "object",
+          "description": "A map of data fields the application requests."
+        },
+        "minAgeGroup": {
+            "type": "string",
+            "enum": ["All ages", "18+"]
+        },
+        "verified": {
+            "type": "boolean",
+            "description": "Whether the app has been verified by an admin."
+        },
+        "verificationRequested": {
+            "type": "boolean",
+            "description": "Whether the developer has requested verification."
+        },
+        "description": {
+            "type": "string",
+            "description": "A short description of the app shown on the approval page."
+        },
+        "buttonDescription": {
+            "type": "string",
+            "description": "A very short (1-5 word) description to show on the button itself."
+        },
+        "buttonStyle": {
+            "type": "object",
+            "properties": {
+                "mainText": {"type": "string", "enum": ["Continue with FastPass", "FastPass"]},
+                "hideAnimation": {"type": "boolean"},
+                "hideAppName": {"type": "boolean"},
+                "hideVerificationBadge": {"type": "boolean"}
+            }
+        }
+      },
+      "required": ["id", "name", "redirectUri", "ownerUid", "createdAt"]
+    }
+  },
+  "auth": {
+    "providers": ["google.com", "password"]
+  },
+  "database": {
+    "rules_path": "database.rules.json"
+  }
+}
